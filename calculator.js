@@ -1,6 +1,7 @@
 var operand1 = ''
 var operand2 = ''
 var operator = null;
+var overwrite = false;
 
 function handleInput(input, type){
 	if(type == 'num'){
@@ -15,9 +16,13 @@ function handleInput(input, type){
 
 function handleNum(input){
 	//Cases: 
-	if(operator == null){
+	if(operator == null && overwrite == false){
 		operand1+=input.toString();
 		document.getElementById('screen').innerHTML = operand1;
+	}else if(operator == null && overwrite == true){
+		operand1 = input;
+		document.getElementById('screen').innerHTML = operand1;
+		overwrite = false;
 	}else{
 		operand2+=input.toString();
 		document.getElementById('screen').innerHTML = operand2;
@@ -26,9 +31,17 @@ function handleNum(input){
 }
 
 function handleOther(input){
-	if(input == '=' && equalsCondition() == true){
-		operand1 = parseInt(operand1, 10);
-		operand2 = parseInt(operand2, 10);
+	if(input == 'RESET'){
+		operand1 = '';
+		operand2 = '';
+		operator = null;
+		overwrite = false;
+		document.getElementById('screen').innerHTML = 0;
+
+	}
+	else if(input == '=' && equalsCondition() == true){
+		operand1 = parseFloat(operand1, 10);
+		operand2 = parseFloat(operand2, 10);
 		switch(operator){
 			case('+'):
 				sum();
@@ -46,7 +59,7 @@ function handleOther(input){
 				break;
 		}
 	}else{
-		console.log('wrong input');
+		console.log('you fucked up');
 	}
 	return;
 }
@@ -60,31 +73,39 @@ function equalsCondition(){
 }
 
 function sum(){
-	document.getElementById('screen').innerHTML = operand1 + operand2;
-	operand1 = '';
+	var result = operand1 + operand2;
+	document.getElementById('screen').innerHTML = result;
+	operand1 = result;
 	operand2 = '';
 	operator = null;
+	overwrite = true;
 	return;
 }
 function sub(){
-	document.getElementById('screen').innerHTML = operand1 - operand2;
-	operand1 = '';
+	var result = operand1 - operand2;
+	document.getElementById('screen').innerHTML = result;
+	operand1 = result;
 	operand2 = '';
 	operator = null;
+	overwrite = true;
 	return;
 }
 
 function mult(){
-	document.getElementById('screen').innerHTML = operand1 * operand2;
-	operand1 = '';
+	var result = operand1 * operand2;
+	document.getElementById('screen').innerHTML = result;
+	operand1 = result;
 	operand2 = '';
-	operator = null;	
+	operator = null;
+	overwrite = true;
 	return;
 }
 function div(){
-	document.getElementById('screen').innerHTML = operand1 / operand2;
-	operand1 = '';
+	var result = operand1 / operand2;
+	document.getElementById('screen').innerHTML = result;
+	operand1 = result;
 	operand2 = '';
-	operator = null;	
+	operator = null;
+	overwrite = true;
 	return;
 }
