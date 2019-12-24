@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="calculator.css">
+</head>
+<title>
+	Calculator
+</title>
+<header>
+	Calculator
+</header>
+<body>
+	<div id="calculator_body">
+		<h1 id="screen">0</h1>
+	
+		<button onclick="handleInput('RESET', 'other')" id="RESET" class="calculator_button">RESET</button>
+		<button class="calculator_button"></button>
+		<button class="calculator_button"></button>
+		<button class="calculator_button"></button>
+		<button onclick="handleInput(1, 'num')" id="one" class="calculator_button">1</button>
+		<button onclick="handleInput(2, 'num')" id="two" class="calculator_button">2</button>
+		<button onclick="handleInput(3, 'num')" id="three" class="calculator_button">3</button>
+		<button onclick="handleInput('/', 'operator')" id="divide" class="calculator_button">/</button>
+		<button onclick="handleInput(4, 'num')" id="four" class="calculator_button">4</button>
+		<button onclick="handleInput(5, 'num')" id="five" class="calculator_button">5</button>
+		<button onclick="handleInput(6, 'num')" id="six" class="calculator_button">6</button>
+		<button onclick="handleInput('x', 'operator')" id="multiply" class="calculator_button">x</button>
+		<button onclick="handleInput(7, 'num')" id="seven" class="calculator_button">7</button>
+		<button onclick="handleInput(8, 'num')" id="eight" class="calculator_button">8</button>
+		<button onclick="handleInput(9, 'num')" id="nine" class="calculator_button">9</button>
+		<button onclick="handleInput('-','operator')" id="subtract" class="calculator_button">-</button>
+		<button onclick="handleInput(0, 'num')" id="zero" class="calculator_button">0</button>
+		<button onclick="handleInput('.','num')" id="decimal" class="calculator_button">.</button>
+		<button onclick="handleInput('=', 'other')" id="equals" class="calculator_button">=</button>
+		<button onclick="handleInput('+', 'operator')" id="add" class="calculator_button">+</button>
+		<script src="calculator.js"></script>
+
+	</div>
+
+</body>
