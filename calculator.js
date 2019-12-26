@@ -4,11 +4,13 @@ var operator = null;
 var overwrite = false;
 
 function handleInput(input, type){
-	if(type == 'num'){
+	if(type === 'num'){
 		handleNum(input);
-	}else if(type == 'operator'){
+	}else if(type === 'operator'){
 		operator = input;
-	}else if(type == 'other'){
+		overwrite = false;
+		operand2 = '';
+	}else if(type === 'other'){
 		handleOther(input);
 	}
 	return;
@@ -16,13 +18,18 @@ function handleInput(input, type){
 
 function handleNum(input){
 	//Cases: 
-	if(operator == null && overwrite == false){
+
+	//Inputting first number
+	if(operator === null && overwrite === false){
 		operand1+=input.toString();
 		document.getElementById('screen').innerHTML = operand1;
-	}else if(operator == null && overwrite == true){
+
+	//Inputting number after operation has been performed
+	}else if(overwrite === true){
+		reset();
 		operand1 = input;
 		document.getElementById('screen').innerHTML = operand1;
-		overwrite = false;
+	//Inputting second number
 	}else{
 		operand2+=input.toString();
 		document.getElementById('screen').innerHTML = operand2;
@@ -31,15 +38,12 @@ function handleNum(input){
 }
 
 function handleOther(input){
-	if(input == 'RESET'){
-		operand1 = '';
-		operand2 = '';
-		operator = null;
-		overwrite = false;
+	if(input === 'RESET'){
+		reset();
 		document.getElementById('screen').innerHTML = 0;
 
 	}
-	else if(input == '=' && equalsCondition() == true){
+	else if(input === '=' && equalsCondition() === true){
 		operand1 = parseFloat(operand1, 10);
 		operand2 = parseFloat(operand2, 10);
 		switch(operator){
@@ -58,6 +62,8 @@ function handleOther(input){
 			default: 
 				break;
 		}
+		overwrite = true;
+
 	}else{
 		console.log('you fucked up');
 	}
@@ -65,7 +71,7 @@ function handleOther(input){
 }
 
 function equalsCondition(){
-	if(operand1 == '' || operand2 == '' || operator == null){
+	if(isNaN(operand1) || isNaN(operand2) || operator === null){
 		return false;
 	}else{
 		return true;
@@ -76,18 +82,12 @@ function sum(){
 	var result = operand1 + operand2;
 	document.getElementById('screen').innerHTML = result;
 	operand1 = result;
-	operand2 = '';
-	operator = null;
-	overwrite = true;
 	return;
 }
 function sub(){
 	var result = operand1 - operand2;
 	document.getElementById('screen').innerHTML = result;
 	operand1 = result;
-	operand2 = '';
-	operator = null;
-	overwrite = true;
 	return;
 }
 
@@ -95,17 +95,17 @@ function mult(){
 	var result = operand1 * operand2;
 	document.getElementById('screen').innerHTML = result;
 	operand1 = result;
-	operand2 = '';
-	operator = null;
-	overwrite = true;
 	return;
 }
 function div(){
 	var result = operand1 / operand2;
 	document.getElementById('screen').innerHTML = result;
 	operand1 = result;
+	return;
+}
+function reset(){
+	operand1 = '';
 	operand2 = '';
 	operator = null;
-	overwrite = true;
-	return;
+	overwrite = false;
 }
